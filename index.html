@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Train Schedule</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Train Schedule</h1>
+                <p>An up to the minute schedule of train Arrivals</p>
+            </div>
+            <div class="schedule">
+                <div class="schedule-heading">
+                    <h2>Current Train Schedule</h2>
+                </div>
+            </div>
+            <div class="schedule-body">
+                <table class="table" id="train-table">
+                    <tr>
+                        <th>Train Name</th>
+                        <th>Destination</th>
+                        <th>Frequency (min)</th>
+                        <th>Next Arrival</th>
+                        <th>Minutes Away</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="train-add">
+                    <div class="train-heading">
+                        <h3>Add Train</h3>
+                    </div>
+                    <form action="form" class="body">
+                        <label for="">Train Name</label>
+                        <input type="text" class="form-control" id="trainName" placeholder="">
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>
