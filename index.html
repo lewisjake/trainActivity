@@ -91,24 +91,26 @@
     }
     // upload to firebase
     database.ref().push(newTrains);
-
-    console.log(newTrains);
-
+    console.log(newTrains.name);
+    console.log(newTrains.tDestination);
+    console.log(newTrains.tFirstTime);
+    console.log(newTrains.tFreq);
     return false;
 });
-database.ref().on("child_added", function(snapshot) {
-    var name = snapshot.val().name;
-    var destination = snapshot.val().destination;
-    var frequency = snapshot.val().frequency;
-    var firstTrain = snapshot.val().firstTrain;
-
-    var remainder = moment().diff(moment.unix(firstTrain), "minutes")%frequency;
-    var minutes = frequency - remainder;
-    var arrival = moment().add(minutes,"m").format("HH:mm");
-
-    $("#train-table > tBody").append("<tr><td>"+name+"</td><td>"+destination+"</td><td>"+frequency+"</td><td>"+arrival+"</td><td>"+minutes+"</td></tr>");
+database.ref().on("child_added", function(childSnapshot, prevChildKey) {
+    var name = childSnapshot.val().name;
+    var destination = childSnapshot.val().tDestination;
+    var frequency = childSnapshot.val().tFreq;
+    var firstTime = childSnapshot.val().fFirstTime;
+    var currentTime = moment();
+    var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    var remainder = diffTime % frequency;
+    var minutesTilTrain = frequency - remainder;
+    var nextTrain = moment().add(minutesTilTrain, "minutes");
+    var nextTrainConverted = moment(nextTrain).format("HH:mm a");
+    $("#train-table > tBody").append("<tr><td>"+name+"</td><td>"+destination+"</td><td>"+frequency+"</td><td>"+nextTrainConverted+"</td><td>"+minutesTilTrain+"</td></tr>");
   });
-
         </script>
     </body>
 </html>
